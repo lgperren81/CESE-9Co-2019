@@ -31,23 +31,16 @@
 
 /*==================[external functions definition]==========================*/
 
+/* Esta tarea es la unica que puede enviar un mensaje por la UART */
 void task_show_values( void* taskParmPtr ){
 
 	char *uartMessageToPrint;
 	for( ;; ) {
 	      /* Wait for a message to arrive. */
-	      xQueueReceive( xi2cQueue, &uartMessageToPrint, portMAX_DELAY );
+	      xQueueReceive( xPrintQueue, &uartMessageToPrint, portMAX_DELAY );
 	      uartWriteString( UART_USB, uartMessageToPrint);
 	      /* Now simply go back to wait for the next message. */
 	}
-}
-// Funcion que inicializa la tarea
-void task1_Init( int32_t pin ){
-   gpioConfig(pin, GPIO_OUTPUT);
-}
-
-void task2_Init( int32_t pin ){
-	gpioConfig(pin, GPIO_INPUT);
 }
 
 // Funcion que se ejecuta periodicamente cada 1 segundo
@@ -60,9 +53,6 @@ void task_read_measurement( void* taskParmPtr ){
 			// Función que lee los registros del INA219
 			ina219Read();
 		}
-}
-void task1_Update( void* taskParam ){
-   gpioToggle( (int32_t)taskParam );
 }
 
 /*==================[end of file]============================================*/

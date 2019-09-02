@@ -9,7 +9,7 @@
 /*==================[inlcusiones]============================================*/
 
 // Includes de FreeRTOS
-#include "FreeRTOS.h"			// Motor del SO
+//#include "FreeRTOS.h"			// Motor del SO
 #include "FreeRTOSConfig.h"
 #include "task.h"				// API de control de tareas y temporizacion
 #include "semphr.h"				// API de sincronización (sem y mutex)
